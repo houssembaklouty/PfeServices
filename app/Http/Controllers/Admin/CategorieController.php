@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CreateCategorieRequest;
 use App\Http\Requests\UpdateCategorieRequest;
@@ -31,7 +31,7 @@ class CategorieController extends AppBaseController
     {
         $categories = $this->categorieRepository->all();
 
-        return view('categories.index')
+        return view('admin.categories.index')
             ->with('categories', $categories);
     }
 
@@ -42,7 +42,7 @@ class CategorieController extends AppBaseController
      */
     public function create()
     {
-        return view('categories.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -60,7 +60,7 @@ class CategorieController extends AppBaseController
 
         Flash::success('Categorie saved successfully.');
 
-        return redirect(route('categories.index'));
+        return redirect(route('admin.categories.index'));
     }
 
     /**
@@ -77,10 +77,10 @@ class CategorieController extends AppBaseController
         if (empty($categorie)) {
             Flash::error('Categorie not found');
 
-            return redirect(route('categories.index'));
+            return redirect(route('admin.categories.index'));
         }
 
-        return view('categories.show')->with('categorie', $categorie);
+        return view('admin.categories.show')->with('categorie', $categorie);
     }
 
     /**
@@ -97,10 +97,10 @@ class CategorieController extends AppBaseController
         if (empty($categorie)) {
             Flash::error('Categorie not found');
 
-            return redirect(route('categories.index'));
+            return redirect(route('admin.categories.index'));
         }
 
-        return view('categories.edit')->with('categorie', $categorie);
+        return view('admin.categories.edit')->with('categorie', $categorie);
     }
 
     /**
@@ -118,14 +118,14 @@ class CategorieController extends AppBaseController
         if (empty($categorie)) {
             Flash::error('Categorie not found');
 
-            return redirect(route('categories.index'));
+            return redirect(route('admin.categories.index'));
         }
 
         $categorie = $this->categorieRepository->update($request->all(), $id);
 
         Flash::success('Categorie updated successfully.');
 
-        return redirect(route('categories.index'));
+        return redirect(route('admin.categories.index'));
     }
 
     /**
@@ -144,13 +144,13 @@ class CategorieController extends AppBaseController
         if (empty($categorie)) {
             Flash::error('Categorie not found');
 
-            return redirect(route('categories.index'));
+            return redirect(route('admin.categories.index'));
         }
 
         $this->categorieRepository->delete($id);
 
         Flash::success('Categorie deleted successfully.');
 
-        return redirect(route('categories.index'));
+        return redirect(route('admin.categories.index'));
     }
 }

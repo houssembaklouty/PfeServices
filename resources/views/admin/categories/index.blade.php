@@ -13,10 +13,10 @@
                          <div class="card-header">
                              <i class="fa fa-align-justify"></i>
                              Categories
-                             <a class="pull-right" href="{{ route('categories.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
+                             <a class="pull-right" href="{{ route('admin.categories.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
                          </div>
                          <div class="card-body">
-                             @include('categories.table')
+                             @include('admin.categories.table')
                               <div class="pull-right mr-3">
 
                               </div>
