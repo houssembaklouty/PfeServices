@@ -19,10 +19,10 @@
 <body class="app flex-row align-items-center">
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card mx-4">
                 <div class="card-body p-4">
-                    <form method="post" action="{{ route('jobeur.register') }}">
+                    <form method="post" action="{{ route('jobeur.register') }}" enctype="multipart/form-data">
                         @csrf
                         <h1>Jobuer Register</h1>
                         <p class="text-muted">Create your account</p>
@@ -53,28 +53,82 @@
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="icon-lock"></i>
-                              </span>
+                                <span class="input-group-text">..</span>
                             </div>
-                            <input type="password" class="form-control {{ $errors->has('password')?'is-invalid':''}}" name="password" placeholder="Password">
-                            @if ($errors->has('password'))
+                            <input type="tel" class="form-control {{ $errors->has('tel')?'is-invalid':'' }}" name="tel" value="{{ old('tel') }}" placeholder="Telephone">
+                            @if ($errors->has('tel'))
                                 <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('password') }}</strong>
+                                    <strong>{{ $errors->first('tel') }}</strong>
                                 </span>
                             @endif
                         </div>
-                        <div class="input-group mb-4">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="icon-lock"></i>
-                              </span>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text">
+                                        <i class="icon-lock"></i>
+                                      </span>
+                                    </div>
+                                    <input type="password" class="form-control {{ $errors->has('password')?'is-invalid':''}}" name="password" placeholder="Password">
+                                    @if ($errors->has('password'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
-                            <input type="password" name="password_confirmation" class="form-control"
-                                   placeholder="Confirm password">
-                            @if ($errors->has('password_confirmation'))
+                            <div class="col-md-6">
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icon-lock"></i>
+                                    </span>
+                                    </div>
+                                    <input type="password" name="password_confirmation" class="form-control"
+                                        placeholder="Confirm password">
+                                    @if ($errors->has('password_confirmation'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Profil_img</span>
+                                    </div>
+                                    <input type="file" name="profil_img" class="form-control">
+                                    @if ($errors->has('profil_img'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('profil_img') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">CIN</span>
+                                    </div>
+                                    <input type="file" name="cin_img" class="form-control">
+                                    @if ($errors->has('cin_img'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('cin_img') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-4">
+                            <textarea name="note" id="note" cols="20" rows="10" class="form-control" placeholder="Note"></textarea>
+                            @if ($errors->has('note'))
                                 <span class="help-block">
-                                  <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                  <strong>{{ $errors->first('note') }}</strong>
                                </span>
                             @endif
                         </div>

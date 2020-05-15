@@ -66,9 +66,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if(!is_null($data['profil_img'])){
+
+            $extension = $data['profil_img']->getClientOriginalExtension();
+            $filename = time().rand(10, 1000).'.'.$extension;
+            $data['profil_img']->move(public_path('images/profil'), $filename);
+
+            $data['profil_img'] = $filename;
+        }
+
+        if(!is_null($data['cin_img'])){
+
+            $extension = $data['cin_img']->getClientOriginalExtension();
+            $filename = time().rand(10, 1000).'.'.$extension;
+            $data['cin_img']->move(public_path('images/cin'), $filename);
+
+            $data['cin_img'] = $filename;
+        }
+
         return Jobeur::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'tel' => $data['tel'],
+            'profil_img' => $data['profil_img'],
+            'cin_img' => $data['cin_img'],
+            'note' => $data['note'],
             'password' => Hash::make($data['password']),
         ]);
     }
