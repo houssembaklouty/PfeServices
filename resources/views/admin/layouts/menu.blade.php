@@ -10,3 +10,9 @@
         <span>Services</span>
     </a>
 </li>
+<li class="nav-item {{ Request::is('jobeurs*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('admin.jobeurs.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Jobeurs</span>
+    </a>
+</li>
