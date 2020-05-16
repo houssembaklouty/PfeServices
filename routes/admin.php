@@ -4,7 +4,8 @@ Route::group(['namespace' => 'Admin'], function() {
     // Dashboard
     Route::get('/', 'HomeController@index')->name('admin.home');
 
-    Route::group(['as' => 'admin.',], function() {
+
+    Route::group(['as' => 'admin.', 'middleware' => 'admin.auth'], function() {
 
         Route::resource('categories', 'CategorieController');
         Route::resource('services', 'ServiceController');
