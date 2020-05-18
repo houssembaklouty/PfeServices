@@ -10,7 +10,6 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::resource('categories', 'CategorieController');
         Route::resource('services', 'ServiceController');
         Route::resource('jobeurs', 'JobeurController');
-        Route::resource('posts', 'PostController');
     });
 
 
