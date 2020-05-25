@@ -8,12 +8,13 @@
     <label>Categorie:</label>
 
     <select class="form-control" name="categorie_id">
+        <option disabled selected> choisissez une categorie</option>
         @foreach($categories as $categorie)
 
             @if( old('categorie_id') == $categorie->id )
 
                 <option value="{{ $categorie->id }}" selected> {{ $categorie->nom }}</option>
-            @elseif( $service->categorie_id == $categorie->id)
+            @elseif( !empty($service) && $service->categorie_id == $categorie->id)
 
                 <option value="{{ $categorie->id }}" selected> {{ $categorie->nom }}</option>
             @else

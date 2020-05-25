@@ -15,7 +15,7 @@
             <td>{{ $service->id }}</td>
             <td>{{ $service->nom }}</td>
             <td>{{ $service->description }}</td>
-            <td>{{ $service->category->nom }}</td>
+            <td>{{ $service->category->nom ?? '' }}</td>
                 <td>
                     {!! Form::open(['route' => ['admin.services.destroy', $service->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

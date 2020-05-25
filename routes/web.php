@@ -11,10 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'FrontController@index')->name('home');
+Route::get('/categories', 'FrontController@categories')->name('categories');
+Route::get('/categories/{id}', 'FrontController@show_categorie')->name('show.categorie');
 
 Auth::routes(['verify' => true]);
 
