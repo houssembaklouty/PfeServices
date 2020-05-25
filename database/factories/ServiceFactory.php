@@ -9,6 +9,7 @@ $factory->define(Service::class, function (Faker $faker) {
 
     return [
         'nom' => $faker->word,
+        'categorie_id' => 1,
         'description' => $faker->word,
         'created_at' => $faker->date('Y-m-d H:i:s'),
         'updated_at' => $faker->date('Y-m-d H:i:s')
