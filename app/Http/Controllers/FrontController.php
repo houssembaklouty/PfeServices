@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostRequest;
 use Illuminate\Http\Request;
 use App\Models\Categorie;
+use App\Models\Service;
+use App\Models\Post;
 
 class FrontController extends Controller
 {
@@ -22,6 +25,28 @@ class FrontController extends Controller
         $categories = Categorie::orderBy('nom', 'asc')->get();
 
         return view('frontend/categories', compact('categories'));
+    }
+
+    public function getServices(Request $request)
+    {
+      //sleep(5);
+
+        $data = Service::select('nom','id')
+                        ->where('categorie_id',$request->id)
+                        ->take(100)
+                        ->get()
+        ;
+
+        return response()->json($data);
+    }
+
+    public function postStore(CreatePostRequest $request)
+    {
+        $input = $request->all();
+
+        $post = Post::create($input);
+
+        return back();
     }
 
     public function show_categorie()

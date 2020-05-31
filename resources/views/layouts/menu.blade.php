@@ -16,3 +16,9 @@
         <span>Posts</span>
     </a>
 </li>
+<li class="nav-item {{ Request::is('demendes*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('demendes.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Demendes</span>
+    </a>
+</li>

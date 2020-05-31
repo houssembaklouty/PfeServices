@@ -21,6 +21,7 @@ class CreateClientsTable extends Migration
             $table->string('password');
             $table->string('tel', 20)->nullable();
             $table->string('profil_img')->nullable();
+            $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

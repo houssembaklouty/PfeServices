@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:clients'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'profil_img' => ['required'],
         ]);
     }
 
@@ -66,10 +67,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if(!is_null($data['profil_img'])){
+
+            $extension = $data['profil_img']->getClientOriginalExtension();
+            $filename = time().rand(10, 1000).'.'.$extension;
+            $data['profil_img']->move(public_path('images/profil'), $filename);
+
+            $data['profil_img'] = $filename;
+        }
+
         return Client::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'profil_img' => $data['profil_img'],
         ]);
     }
 

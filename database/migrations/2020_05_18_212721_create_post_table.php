@@ -18,8 +18,10 @@ class CreatePostTable extends Migration
             $table->string('title');
 
             $table->integer('categorie')->unsigned();
+            $table->BigInteger('client')->unsigned();
             $table->integer('service')->unsigned();
             $table->foreign('categorie')->references('id')->on('categories');
+            $table->foreign('client')->references('id')->on('clients');
             $table->foreign('service')->references('id')->on('services');
 
             $table->string('skills');

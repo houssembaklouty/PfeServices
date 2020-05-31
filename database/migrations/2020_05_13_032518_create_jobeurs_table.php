@@ -23,6 +23,7 @@ class CreateJobeursTable extends Migration
             $table->string('profil_img')->nullable();
             $table->text('note')->nullable();
             $table->string('cin_img')->nullable();
+            $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -11,6 +11,7 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::resource('services', 'ServiceController');
         Route::resource('jobeurs', 'JobeurController');
         Route::resource('posts', 'PostController');
+        Route::resource('demendes', 'DemendeController');
     });
 
 

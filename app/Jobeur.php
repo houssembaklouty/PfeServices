@@ -17,7 +17,7 @@ class Jobeur extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'tel', 'profil_img', 'cin_img', 'note'
+        'name', 'email', 'password', 'tel', 'profil_img', 'cin_img', 'note', 'active'
     ];
 
     /**

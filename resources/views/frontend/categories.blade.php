@@ -171,7 +171,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="company_profile_info">
                                     <div class="company-up-info">
-                                        <img src="/frontend/images/resources/cmp-icon1.png" alt="">
+                                        <img src="/frontend/images/logo.png" alt="">
                                         <h3>{{ $categorie->nom }}</h3>
                                         <h4>{{ $categorie->description }}</h4>
                                         <ul>

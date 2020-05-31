@@ -47,5 +47,10 @@ class Categorie extends Model
         'nom' => 'required'
     ];
 
+    public function services()
+    {
+        return $this->hasMany(\App\Models\Service::class, 'categorie_id');
+    }
+
 
 }

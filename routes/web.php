@@ -14,6 +14,8 @@
 Route::get('/', 'FrontController@index')->name('home');
 Route::get('/categories', 'FrontController@categories')->name('categories');
 Route::get('/categories/{id}', 'FrontController@show_categorie')->name('show.categorie');
+Route::get('/getServices','FrontController@getServices' );
+Route::post('/post/store','FrontController@postStore' )->name('posts.store');
 
 Auth::routes(['verify' => true]);
 

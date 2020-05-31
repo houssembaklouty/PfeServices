@@ -22,7 +22,7 @@
         <div class="col-md-6">
             <div class="card mx-4">
                 <div class="card-body p-4">
-                    <form method="post" action="{{ route('client.register') }}">
+                    <form method="post" action="{{ route('client.register') }}" enctype="multipart/form-data">
                         @csrf
                         <h1>Register</h1>
                         <p class="text-muted">Create your account</p>
@@ -78,6 +78,19 @@
                                </span>
                             @endif
                         </div>
+
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Profil_img</span>
+                            </div>
+                            <input type="file" name="profil_img" class="form-control">
+                            @if ($errors->has('profil_img'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('profil_img') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+
                         <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
                         <a href="{{ route('client.login') }}" class="text-center">I already have a membership</a>
                     </form>

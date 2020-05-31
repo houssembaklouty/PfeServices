@@ -29,6 +29,7 @@ class Post extends Model
 
     public $fillable = [
         'title',
+        'client',
         'categorie',
         'service',
         'skills',
@@ -46,10 +47,11 @@ class Post extends Model
     protected $casts = [
         'id' => 'integer',
         'title' => 'string',
+        'client' => 'integer',
         'categorie' => 'integer',
         'service' => 'integer',
         'skills' => 'string',
-        //'price' => 'double',
+        'price' => 'double',
         'description' => 'text',
         'date' => 'date',
     ];
@@ -61,6 +63,7 @@ class Post extends Model
      */
     public static $rules = [
         'title' => 'required',
+        'client' => 'required',
         'categorie' => 'required',
         'service' => 'required',
         'skills' => 'required',
@@ -83,5 +86,18 @@ class Post extends Model
     public function service_relation()
     {
         return $this->belongsTo(\App\Models\Service::class, 'service', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     **/
+    public function client_relation()
+    {
+        return $this->belongsTo(\App\Client::class, 'client', 'id');
+    }
+
+    public function propositions()
+    {
+        return $this->hasMany(\App\Models\Demende::class, 'id_post');
     }
 }

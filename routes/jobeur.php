@@ -3,6 +3,7 @@
 Route::group(['namespace' => 'Jobeur'], function() {
     // Dashboard
     Route::get('/', 'HomeController@index')->name('jobeur.home');
+    Route::post('/proposition/store', 'HomeController@propositionStore')->name('jobeur.proposition.store');
 
     // Login
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('jobeur.login');
