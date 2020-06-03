@@ -27,7 +27,9 @@ class HomeController extends Controller
     public function index() {
 
         $categories = Categorie::orderBy('nom', 'asc')->get();
-        $posts = Post::with(['catgeory', 'service_relation', 'client_relation'])->orderBy('created_at', 'desc')->get();
+        $posts = Post::with(['catgeory', 'service_relation', 'propositions', 'propositions.jobeur'])
+                        ->orderBy('created_at', 'desc')
+                        ->get();
 
         //dd($posts);
 

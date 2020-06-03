@@ -17,9 +17,11 @@ Route::get('/categories/{id}', 'FrontController@show_categorie')->name('show.cat
 Route::get('/getServices','FrontController@getServices' );
 Route::post('/post/store','FrontController@postStore' )->name('posts.store');
 
-Auth::routes(['verify' => true]);
+Route::get('/jobeurs-profiles', 'FrontController@jobeurs_profiles')->name('jobeurs.profiles');
 
-Route::get('/home', 'HomeController@index')->middleware('verified');
+// Auth::routes(['verify' => true]);
+
+// Route::get('/home', 'HomeController@index')->middleware('verified');
 
 /**
  * https://labs.infyom.com/laravelgenerator/docs/master/schema-builder
@@ -41,3 +43,12 @@ Route::post(
     'generator_builder/generate-from-file',
     '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromFile'
 )->name('io_generator_builder_generate_from_file');
+
+
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('config:cache');
+    return "Cache is cleared";
+});

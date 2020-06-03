@@ -77,12 +77,12 @@
                                   </a>
                               </li>-->
                            <li>
-                              <a href="profiles.html" title="">
+                              <a href="{{ route('jobeurs.profiles') }}" title="">
                               <span><img src="/frontend/images/icon4.png" alt=""></span>
                               Profiles
                               </a>
                               <ul>
-                                 <li><a href="profiles.html" title="">Jobeurs Profiles</a></li>
+                                 <li><a href="{{ route('jobeurs.profiles') }}" title="">Jobeurs Profiles</a></li>
                               </ul>
                            </li>
                         </ul>

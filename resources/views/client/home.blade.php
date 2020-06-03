@@ -235,16 +235,6 @@
 															<span><img src="/frontend/images/clock.png" alt="">{{ $post->created_at->diffForHumans() }}</span>
 														</div>
 													</div>
-													<div class="ed-opts">
-														<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-														<ul class="ed-options">
-															<li><a href="#" title="">Edit Post</a></li>
-
-															<li><a href="#" title="">Delete Post</a></li>
-
-
-														</ul>
-													</div>
 												</div>
 												<div class="epi-sec">
 													<ul class="descp">
@@ -268,26 +258,7 @@
 												<div class="job-status-bar">
 													<ul style="justify-content:space-around!important;" class="like-com">
 
-														<li  ><a href="#" style="margin-top: 20px;" title="" class="com"><img src="/frontend/images/com.png" alt=""> Proposition 15</a></li>
-														<li>
-															<div class="overview-box" id="experience-box">
-																<div class="overview-edit">
-																	<h3>Proposition</h3>
-																	<form>
-																		<div class="price-br col-lg-12">
-																			<input type="text" name="price1" placeholder="Price">
-																			<i  class="la la-dollar"></i>
-																		</div>
-																		<div class="col-lg-12">
-																			<textarea name="description" placeholder="Description"></textarea>
-																		</div>
-																		<button type="submit" class="save">Add</button>
-
-																		<button type="submit" class="cancel">Cancel</button>
-																	</form>
-																	<a href="#" title="" class="close-box"><i class="la la-close"></i></a>
-																</div><!--overview-edit end-->
-															</div><!--overview-box end--></li>
+                                                    <li  ><a href="#" style="margin-top: 20px;" title="" class="com"><img src="/frontend/images/com.png" alt=""> Proposition(s) {{$post->propositions->count() }}</a></li>
 													</ul>
 
 												</div>
@@ -300,49 +271,22 @@
 													<i class="la la-plus"></i>
 												</div>
 												<div class="comment-sec">
+                                                    @foreach($post->propositions as $propositions)
 													<ul>
 														<li>
 															<div class="comment-list">
 																<div class="bg-img">
-																	<img src="/frontend/images/resources/bg-img1.png" alt="">
+                                                                    <img src="{{ url('images/profil', $propositions->jobeur->profil_img ) }}" alt="jobeur avatar" width="50" height="50">
 																</div>
 																<div class="comment">
-																	<h3>John Doe</h3>
-																	<span><img src="/frontend/images/clock.png" alt=""> 3 min ago</span>
-																	<p>Lorem ipsum dolor sit amet, </p>
-																	<a href="#" title="" class="active"><i class="fa fa-reply-all"></i>Reply</a>
-																</div>
-															</div><!--comment-list end-->
-															<ul>
-																<li>
-																	<div class="comment-list">
-																		<div class="bg-img">
-																			<img src="/frontend/images/resources/bg-img2.png" alt="">
-																		</div>
-																		<div class="comment">
-																			<h3>John Doe</h3>
-																			<span><img src="/frontend/images/clock.png" alt=""> 3 min ago</span>
-																			<p>Hi John </p>
-																			<a href="#" title=""><i class="fa fa-reply-all"></i>Reply</a>
-																		</div>
-																	</div><!--comment-list end-->
-																</li>
-															</ul>
-														</li>
-														<li>
-															<div class="comment-list">
-																<div class="bg-img">
-																	<img src="/frontend/images/resources/bg-img3.png" alt="">
-																</div>
-																<div class="comment">
-																	<h3>John Doe</h3>
-																	<span><img src="/frontend/images/clock.png" alt=""> 3 min ago</span>
-																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at.</p>
-																	<a href="#" title=""><i class="fa fa-reply-all"></i>Reply</a>
+																	<h3>{{ $propositions->jobeur->name }}</h3>
+                                                                <span><img src="/frontend/images/clock.png" alt=""> {{ $propositions->created_at->diffForHumans() }}</span>
+																	<p>{{ $propositions->proposition }} </p>
 																</div>
 															</div><!--comment-list end-->
 														</li>
-													</ul>
+                                                    </ul>
+                                                    @endforeach
 												</div><!--comment-sec end-->
 												<div class="post-comment">
 													<div class="cm_img">

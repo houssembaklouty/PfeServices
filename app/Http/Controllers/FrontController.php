@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Categorie;
 use App\Models\Service;
 use App\Models\Post;
+use App\Jobeur;
 
 class FrontController extends Controller
 {
@@ -25,6 +26,15 @@ class FrontController extends Controller
         $categories = Categorie::orderBy('nom', 'asc')->get();
 
         return view('frontend/categories', compact('categories'));
+    }
+
+    public function jobeurs_profiles()
+    {
+        $jobeurs = Jobeur::all();
+
+        // dd($jobeurs);
+
+        return view('frontend/jobeurs_profile', compact('jobeurs'));
     }
 
     public function getServices(Request $request)
