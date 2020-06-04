@@ -88,22 +88,21 @@
 									<div class="nt-title">
 										<h4>Notification</h4>
 
-									</div>
-									<div class="nott-list">
+                                    </div>
 
-						  				<div class="notfication-details">
-							  				<div class="noty-user-img">
-							  					<img src="/frontend/images/resources/ny-img2.png" alt="">
-							  				</div>
-							  				<div class="notification-info">
-							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-							  					<span>2 min ago</span>
-							  				</div><!--notification-info -->
-						  				</div>
-						  				<div class="view-all-nots">
-						  					<a href="#" title="">View All Notification</a>
-						  				</div>
-									</div><!--nott-list end-->
+                                    @foreach (Auth::guard('client')->user()->unreadNotifications as $notification)
+                                        <div class="nott-list">
+                                            <div class="notfication-details">
+                                                <div class="notification-info">
+                                                    <h3><a href="#" >Proposition de : {!! $notification->data['jobeur'] !!}</a> <br> {!! $notification->data['proposition'] .'/ PRICE: '. $notification->data['price'] !!}</h3>
+                                                    <span>{{ $notification->created_at->diffForHumans() }}</span>
+                                                </div><!--notification-info -->
+                                            </div>
+                                        </div><!--nott-list end-->
+                                    @endforeach
+                                    <div class="view-all-nots">
+                                        <a href="{{ route('clientNotifMarkAsRead') }}">Mark as read All Notification </a>
+                                    </div>
 								</div><!--notification-box end-->
 							</li>
 						</ul>
@@ -288,17 +287,7 @@
                                                     </ul>
                                                     @endforeach
 												</div><!--comment-sec end-->
-												<div class="post-comment">
-													<div class="cm_img">
-														<img src="/frontend/images/resources/bg-img4.png" alt="">
-													</div>
-													<div class="comment_box">
-														<form>
-															<input type="text" placeholder="Post a comment">
-															<button type="submit">Send</button>
-														</form>
-													</div>
-												</div><!--post-comment end-->
+
 											</div><!--comment-section end-->
                                         </div><!--posty end-->
 

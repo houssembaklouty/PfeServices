@@ -89,21 +89,22 @@
 										<h4>Notification</h4>
 
 									</div>
-									<div class="nott-list">
-
-						  				<div class="notfication-details">
-							  				<div class="noty-user-img">
-							  					<img src="/frontend/images/resources/ny-img2.png" alt="">
-							  				</div>
-							  				<div class="notification-info">
-							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-							  					<span>2 min ago</span>
-							  				</div><!--notification-info -->
-						  				</div>
-						  				<div class="view-all-nots">
-						  					<a href="#" title="">View All Notification</a>
-						  				</div>
-									</div><!--nott-list end-->
+                                    @foreach (Auth::guard('jobeur')->user()->unreadNotifications as $notification)
+                                        <div class="nott-list">
+                                            <div class="notfication-details">
+                                                <div class="noty-user-img">
+                                                    <img src="/frontend/images/resources/ny-img2.png" alt="">
+                                                </div>
+                                                <div class="notification-info">
+                                                    <h3><a href="#" title="">Jassica William</a> {{{ $notification }}}</h3>
+                                                    <span>2 min ago</span>
+                                                </div><!--notification-info -->
+                                            </div>
+                                            <div class="view-all-nots">
+                                                <a href="#" title="">View All Notification</a>
+                                            </div>
+                                        </div><!--nott-list end-->
+                                    @endforeach
 								</div><!--notification-box end-->
 							</li>
 						</ul>

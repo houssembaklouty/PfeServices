@@ -28,6 +28,15 @@ class FrontController extends Controller
         return view('frontend/categories', compact('categories'));
     }
 
+    public function getServicesForThisGategory($id)
+    {
+        $services = Service::orderBy('nom', 'asc')->where('categorie_id',$id)->get();
+
+        // dd($services);
+
+        return view('frontend/services', compact('services'));
+    }
+
     public function jobeurs_profiles()
     {
         $jobeurs = Jobeur::all();

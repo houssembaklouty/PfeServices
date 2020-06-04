@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Jobeur;
 
+use App\Notifications\NotifUserProposition;
 use App\Http\Requests\CreateDemendeRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
 use App\Models\Service;
 use App\Models\Demende;
 use App\Models\Post;
+use App\Jobeur;
 class HomeController extends Controller
 {
     /**
@@ -42,6 +44,20 @@ class HomeController extends Controller
         $input = $request->all();
 
         $demende = Demende::create($input);
+
+        $post = Post::where('id', $input['id_post'])->with('client_relation')->first();
+
+        $jobeur = Jobeur::where('id', $input['id_jobeur'])->first();
+
+        $user = $post->client_relation;
+
+        $notifData = [
+            'proposition' => $input['proposition'],
+            'price' => $input['price'],
+            'jobeur' => $jobeur->name,
+        ];
+
+        $user->notify(new NotifUserProposition($notifData));
 
         return back();
     }

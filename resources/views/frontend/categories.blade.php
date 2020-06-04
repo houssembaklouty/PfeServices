@@ -62,12 +62,12 @@
 								</a>
 							</li>-->
 							<li>
-								<a href="profiles.html" title="">
+								<a href="{{ route('jobeurs.profiles') }}" title="">
 									<span><img src="/frontend/images/icon4.png" alt=""></span>
 									Profiles
 								</a>
 								<ul>
-									<li><a href="profiles.html" title="">Jobeurs Profiles</a></li>
+									<li><a href="{{ route('jobeurs.profiles') }}" title="">Jobeurs Profiles</a></li>
 									<li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
 								</ul>
 							</li>
@@ -174,27 +174,17 @@
                                         <img src="/frontend/images/logo.png" alt="">
                                         <h3>{{ $categorie->nom }}</h3>
                                         <h4>{{ $categorie->description }}</h4>
-                                        <ul>
-                                            <li><a href="#" title="" class="follow">Follow</a></li>
-                                            <li><a href="#" title="" class="message-us"><i class="fa fa-envelope"></i></a></li>
-                                        </ul>
                                     </div>
-                                <a href="{{ route('show.categorie', $categorie->id) }}" title="" class="view-more-pro">View Profile</a>
+                                <a href="{{ route('getServicesForThisGategory', $categorie->id) }}" title="" class="view-more-pro">View Services ({{ $categorie->services->count() }})</a>
                                 </div><!--company_profile_info end-->
                             </div>
                         @endforeach
 					</div>
 				</div><!--categories-list end-->
-				<div class="process-comm">
-					<a href="#" title=""><img src="/frontend/images/process-icon.png" alt=""></a>
-				</div>
 			</div>
 		</section><!--categories-info end-->
 
-
 	</div><!--theme-layout end-->
-
-
 
 <script type="text/javascript" src="/frontend/js/jquery.min.js"></script>
 <script type="text/javascript" src="/frontend/js/popper.js"></script>

@@ -4,6 +4,12 @@ Route::group(['namespace' => 'Client'], function() {
     // Dashboard
     Route::get('/', 'HomeController@index')->name('client.home');
 
+    Route::get('/notif/markAsRead', function(){
+        \Auth::guard('client')->user()->unreadNotifications->markAsRead();
+        return back();
+    })->name('clientNotifMarkAsRead');
+
+
     // Login
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('client.login');
     Route::post('login', 'Auth\LoginController@login');
