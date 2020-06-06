@@ -9,6 +9,8 @@ Route::group(['namespace' => 'Client'], function() {
         return back();
     })->name('clientNotifMarkAsRead');
 
+    Route::post('/proposition/change-state', 'HomeController@propositionChangeState')
+        ->name('client.proposition.change_state');
 
     // Login
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('client.login');

@@ -100,12 +100,30 @@
 						<a href="#" title=""><i class="fa fa-bars"></i></a>
 					</div><!--menu-btn end-->
 					<div class="user-account">
-						<div class="user-info">
-							<img src="/frontend/images/resources/user.png" alt="">
-							<a href="#" title="">John</a>
-							<i class="la la-sort-down"></i>
-						</div>
-						<div class="user-account-settingss">
+                        @if(Auth::guard('jobeur')->user( ))
+                            <div class="user-info">
+                                <img src="{{ url('images/profil', Auth::guard('jobeur')->user()->profil_img ) }}" width="30" height="30">
+                                <a href="#" title="">{{ Auth::guard('jobeur')->user()->name }}</a>
+                                <i class="la la-sort-down"></i>
+                            </div>
+
+                        @elseif(Auth::guard('client')->user()->name != null)
+                            <div class="user-info">
+                                <img src="{{ url('images/profil', Auth::guard('client')->user()->profil_img ) }}" width="30" height="30">
+                                <a href="#" title="">{{ Auth::guard('client')->user()->name }}</a>
+                                <i class="la la-sort-down"></i>
+                            </div>
+
+                        @elseif(Auth::guard('admin')->user()->name != null)
+                            <div class="user-info">
+                                <img src="{{ url('images/profil', Auth::guard('admin')->user()->profil_img ) }}" width="30" height="30">
+                                <a href="#" title="">{{ Auth::guard('admin')->user()->name }}</a>
+                                <i class="la la-sort-down"></i>
+                            </div>
+
+                        @endif
+
+                        <div class="user-account-settingss">
 							<!--<h3>Online Status</h3>
 							<ul class="on-off-status">
 								<li>

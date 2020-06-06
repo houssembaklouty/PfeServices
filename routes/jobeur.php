@@ -3,6 +3,12 @@
 Route::group(['namespace' => 'Jobeur'], function() {
     // Dashboard
     Route::get('/', 'HomeController@index')->name('jobeur.home');
+
+    Route::get('/notif/markAsRead', function(){
+        \Auth::guard('jobeur')->user()->unreadNotifications->markAsRead();
+        return back();
+    })->name('jobuerNotifMarkAsRead');
+
     Route::post('/proposition/store', 'HomeController@propositionStore')->name('jobeur.proposition.store');
 
     // Login

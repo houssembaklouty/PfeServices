@@ -63,12 +63,12 @@
 								</a>
 							</li>-->
 							<li>
-								<a href="profiles.html" title="">
+								<a href="#" title="">
 									<span><img src="/frontend/images/icon4.png" alt=""></span>
 									Profiles
 								</a>
 								<ul>
-									<li><a href="profiles.html" title="">jobeurs Profiles</a></li>
+									<li><a href="{{ route('jobeurs.profiles') }}" title="">jobeurs Profiles</a></li>
 									<li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
 								</ul>
 							</li>
@@ -89,22 +89,20 @@
 										<h4>Notification</h4>
 
 									</div>
+
                                     @foreach (Auth::guard('jobeur')->user()->unreadNotifications as $notification)
                                         <div class="nott-list">
                                             <div class="notfication-details">
-                                                <div class="noty-user-img">
-                                                    <img src="/frontend/images/resources/ny-img2.png" alt="">
-                                                </div>
                                                 <div class="notification-info">
-                                                    <h3><a href="#" title="">Jassica William</a> {{{ $notification }}}</h3>
-                                                    <span>2 min ago</span>
+                                                    <h3><a href="#" >{!! $notification->data['msg'] !!}</a> <br> {!! $notification->data['proposition'] .'/ PRICE: '. $notification->data['price'] !!}</h3>
+                                                    <span>{{ $notification->created_at->diffForHumans() }}</span>
                                                 </div><!--notification-info -->
-                                            </div>
-                                            <div class="view-all-nots">
-                                                <a href="#" title="">View All Notification</a>
                                             </div>
                                         </div><!--nott-list end-->
                                     @endforeach
+                                    <div class="view-all-nots">
+                                        <a href="{{ route('jobuerNotifMarkAsRead') }}">Mark as read All Notification </a>
+                                    </div>
 								</div><!--notification-box end-->
 							</li>
 						</ul>
@@ -314,17 +312,6 @@
                                                     </ul>
                                                     @endforeach
 												</div><!--comment-sec end-->
-												<div class="post-comment">
-													<div class="cm_img">
-														<img src="/frontend/images/resources/bg-img4.png" alt="">
-													</div>
-													<div class="comment_box">
-														<form>
-															<input type="text" placeholder="Post a comment">
-															<button type="submit">Send</button>
-														</form>
-													</div>
-												</div><!--post-comment end-->
 											</div><!--comment-section end-->
                                         </div><!--posty end-->
 

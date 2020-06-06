@@ -63,12 +63,12 @@
 								</a>
 							</li>-->
 							<li>
-								<a href="profiles.html" title="">
+								<a href="#" title="">
 									<span><img src="/frontend/images/icon4.png" alt=""></span>
 									Profiles
 								</a>
 								<ul>
-									<li><a href="profiles.html" title="">clients Profiles</a></li>
+									<li><a href="{{ route('jobeurs.profiles') }}" title="">Jobeurs Profiles</a></li>
 									<li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
 								</ul>
 							</li>
@@ -279,8 +279,31 @@
 																</div>
 																<div class="comment">
 																	<h3>{{ $propositions->jobeur->name }}</h3>
-                                                                <span><img src="/frontend/images/clock.png" alt=""> {{ $propositions->created_at->diffForHumans() }}</span>
-																	<p>{{ $propositions->proposition }} </p>
+                                                                <span>
+                                                                    <img src="/frontend/images/clock.png" alt="">
+                                                                    {{ $propositions->created_at->diffForHumans() }}
+                                                                </span>
+                                                                    <p>{{ $propositions->proposition }} </p>
+
+                                                                    @if($propositions->etat == false)
+                                                                        <form method="post" action="{{ route('client.proposition.change_state') }}">
+                                                                            @csrf
+
+                                                                            <input type="hidden" name="id" value="{{ $propositions->id }}">
+                                                                            <input type="hidden" name="etat" value="1">
+
+                                                                            <button class="btn btn-sm btn-success pull-right" type="submit" value="post">Accepter</button>
+                                                                        </form>
+                                                                        @else
+                                                                        <form method="post" action="{{ route('client.proposition.change_state') }}">
+                                                                            @csrf
+
+                                                                            <input type="hidden" name="id" value="{{ $propositions->id }}">
+                                                                            <input type="hidden" name="etat" value="0">
+
+                                                                            <button class="btn btn-sm btn-danger pull-right" type="submit" value="post">Refusé</button>
+                                                                        </form>
+                                                                    @endif
 																</div>
 															</div><!--comment-list end-->
 														</li>

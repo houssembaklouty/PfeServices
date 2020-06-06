@@ -20,7 +20,7 @@
                 <td>{{ $post->service_relation->nom }}</td>
                 <td>{{ $post->skills }}</td>
                 <td>{{ $post->price }}</td>
-                <td style="max-width:100px;">{{ $post->description }}</td>
+                <td style="max-width:100px;">{{ Str::limit($post->description, 30) }}</td>
                 <td>{{ $post->date }}</td>
                 <td>
                     {!! Form::open(['route' => ['admin.posts.destroy', $post->id], 'method' => 'delete']) !!}
