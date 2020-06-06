@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Jobeur;
 use App\Notifications\NotifUserProposition;
 use App\Http\Requests\CreateDemendeRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Categorie;
 use App\Models\Service;
 use App\Models\Demende;
 use App\Models\Post;
 use App\Jobeur;
+use Auth;
 class HomeController extends Controller
 {
     /**
@@ -37,6 +39,18 @@ class HomeController extends Controller
         // dd($posts);
 
         return view('jobeur.home', compact('categories', 'posts'));
+    }
+
+    public function profile() {
+
+        return view('jobeur.profile');
+    }
+
+    public function propositionDestroy (Request $request) {
+
+        $demende = Demende::where('id', $request->id)->delete();
+
+        return back();
     }
 
     public function propositionStore(CreateDemendeRequest $request)

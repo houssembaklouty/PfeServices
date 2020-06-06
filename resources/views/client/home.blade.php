@@ -69,7 +69,7 @@
 								</a>
 								<ul>
 									<li><a href="{{ route('jobeurs.profiles') }}" title="">Jobeurs Profiles</a></li>
-									<li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
+									<li><a href="{{ route('client.profile') }}" title="">my-profile-feed</a></li>
 								</ul>
 							</li>
 							<li>
@@ -198,7 +198,7 @@
 											</li>
 
 											<li>
-												<a href="#" title="">View Profile</a>
+												<a href="{{ route('client.profile') }}" title="">View Profile</a>
 											</li>
 										</ul>
 									</div><!--user-data end-->

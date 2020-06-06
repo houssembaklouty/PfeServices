@@ -3,6 +3,7 @@
 Route::group(['namespace' => 'Jobeur'], function() {
     // Dashboard
     Route::get('/', 'HomeController@index')->name('jobeur.home');
+    Route::get('/profile', 'HomeController@profile')->name('jobeur.profile');
 
     Route::get('/notif/markAsRead', function(){
         \Auth::guard('jobeur')->user()->unreadNotifications->markAsRead();
@@ -10,6 +11,7 @@ Route::group(['namespace' => 'Jobeur'], function() {
     })->name('jobuerNotifMarkAsRead');
 
     Route::post('/proposition/store', 'HomeController@propositionStore')->name('jobeur.proposition.store');
+    Route::post('/proposition/destroy', 'HomeController@propositionDestroy')->name('jobeur.proposition.destroy');
 
     // Login
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('jobeur.login');

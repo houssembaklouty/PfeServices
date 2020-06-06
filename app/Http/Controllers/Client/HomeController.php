@@ -40,6 +40,11 @@ class HomeController extends Controller
         return view('client.home', compact('categories', 'posts'));
     }
 
+    public function profile() {
+
+        return view('client.profile');
+    }
+
     public function propositionChangeState(Request $request) {
 
         $demende = Demende::where('id', $request->id)->first();

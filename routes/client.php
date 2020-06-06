@@ -3,6 +3,7 @@
 Route::group(['namespace' => 'Client'], function() {
     // Dashboard
     Route::get('/', 'HomeController@index')->name('client.home');
+    Route::get('/profile', 'HomeController@profile')->name('client.profile');
 
     Route::get('/notif/markAsRead', function(){
         \Auth::guard('client')->user()->unreadNotifications->markAsRead();

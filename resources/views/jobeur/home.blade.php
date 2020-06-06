@@ -69,7 +69,7 @@
 								</a>
 								<ul>
 									<li><a href="{{ route('jobeurs.profiles') }}" title="">jobeurs Profiles</a></li>
-									<li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
+									<li><a href="{{ route('jobeur.profile') }}" title="">my-profile-feed</a></li>
 								</ul>
 							</li>
 							<li>
@@ -198,7 +198,7 @@
 											</li>
 
 											<li>
-												<a href="#" title="">View Profile</a>
+                                                <a href="{{ route('jobeur.profile') }}" title="">View Profile</a>
 											</li>
 										</ul>
 									</div><!--user-data end-->
@@ -208,22 +208,12 @@
 							</div>
 							<div class="col-lg-6 col-md-8 no-pd">
 								<div class="main-ws-sec">
-									<div class="post-topbar">
-										<div class="user-picy">
-                                            <img src="{{ url('images/profil', Auth::guard('jobeur')->user()->profil_img ) }}" width="35" height="35">
-										</div>
-										<div class="post-st">
-											<ul>
 
-												<li><a class="post-jb active" href="#" title="">Post a Job</a></li>
-											</ul>
-										</div><!--post-st end-->
-									</div><!--post-topbar end-->
 									<div class="posts-section">
 
                                         @foreach($posts as $post)
 
-										<div class="posty" style="margin-bottom: 1em;">
+                                            <div class="posty" style="margin-bottom: 1em;">
 											<div class="post-bar no-margin">
 												<div class="post_topbar">
 													<div class="usy-dt">
@@ -306,7 +296,19 @@
 																	<h3>{{ $propositions->jobeur->name }}</h3>
                                                                 <span><img src="/frontend/images/clock.png" alt=""> {{ $propositions->created_at->diffForHumans() }}</span>
 																	<p>{{ $propositions->proposition }} </p>
-																</div>
+                                                                </div>
+
+                                                                @if($propositions->jobeur->id == Auth::guard('jobeur')->user()->id)
+
+                                                                    <form method="post" action="{{ route('jobeur.proposition.destroy') }}">
+                                                                        @csrf
+
+                                                                        <input type="hidden" name="id" value="{{ $propositions->id }}">
+                                                                        <button class="btn btn-sm btn-danger pull-right" onclick= "return confirm('Are You Sure Want to Delete?')" type="submit">
+                                                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
 															</div><!--comment-list end-->
 														</li>
                                                     </ul>
@@ -488,87 +490,6 @@
 				</div>
 			</div>
 		</main>
-
-
-
-
-
-		<div class="post-popup job_post">
-			<div class="post-project">
-                <h3>Post a job</h3>
-				<div class="post-project-fields">
-                    <div>
-                        @if ($errors->any())
-                            @foreach ($errors->all() as $error)
-                                <div>{{$error}}</div>
-                            @endforeach
-                        <br>
-                        @endif
-                    </div>
-                    <form method="post" action="{{ route('posts.store') }}">
-                        @csrf
-
-                        <input type="hidden" name="jobeur" value="{{ Auth::guard('jobeur')->user()->id }}">
-
-						<div class="row">
-							<div class="col-lg-12">
-								<input type="text" name="title" placeholder="Title" required>
-							</div>
-							<div class="col-lg-12">
-								<div class="inp-field">
-									<select class="categories" name="categorie" required>
-                                        <option disabled selected>Category</option>
-                                        @foreach ($categories as $categorie)
-										    <option value="{{ $categorie->id }}">{{ $categorie->nom }}</option>
-                                        @endforeach
-									</select>
-								</div>
-							</div>
-
-							<div class="col-lg-12">
-								<div class="inp-field">
-									<select class="services" name="service" required>
-                                        <option disabled selected>Service</option>
-									</select>
-								</div>
-							</div>
-
-							<div class="col-lg-12">
-								<input type="text" name="skills" placeholder="Skills" required>
-							</div>
-							<div class="col-lg-6">
-								<div class="price-br">
-									<input type="text" name="price" placeholder="Price" required>
-									<i class="la la-dollar"></i>
-								</div>
-                            </div>
-							<div class="col-lg-6">
-								<input type="date" name="date" placeholder="Date" required>
-                            {{--
-								<div class="inp-field">
-									<select>
-										<option>Full Time</option>
-										<option>Half time</option>
-									</select>
-								</div> --}}
-							</div>
-							<div class="col-lg-12">
-								<textarea name="description" placeholder="Description" required></textarea>
-							</div>
-							<div class="col-lg-12">
-								<ul>
-									<li><button class="active" type="submit" value="post">Post</button></li>
-									<li><a href="#" title="">Cancel</a></li>
-								</ul>
-							</div>
-						</div>
-					</form>
-				</div><!--post-project-fields end-->
-				<a href="#" title=""><i class="la la-times-circle-o"></i></a>
-			</div><!--post-project end-->
-		</div><!--post-project-popup end-->
-
-
 
 	<!--	<div class="chatbox-list">
 			<div class="chatbox">
