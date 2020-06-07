@@ -56,40 +56,6 @@
 									Profiles
 								</a>
 							</li>
-							<li>
-								<a href="jobs.html" title="">
-									<span><img src="/frontend/images/icon5.png" alt=""></span>
-									Jobs
-								</a>
-							</li>
-
-							<li>
-								<a href="#" title="" class="not-box-open">
-									<span><img src="/frontend/images/icon7.png" alt=""></span>
-									Notification
-								</a>
-								<div class="notification-box">
-									<div class="nt-title">
-										<h4>Notification</h4>
-
-									</div>
-									<div class="nott-list">
-										<div class="notfication-details">
-							  				<div class="noty-user-img">
-							  					<img src="/frontend/images/resources/ny-img1.png" alt="">
-							  				</div>
-							  				<div class="notification-info">
-							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-							  					<span>2 min ago</span>
-							  				</div><!--notification-info -->
-						  				</div>
-
-						  				<div class="view-all-nots">
-						  					<a href="#" title="">View All Notification</a>
-						  				</div>
-									</div><!--nott-list end-->
-								</div><!--notification-box end-->
-							</li>
 						</ul>
 					</nav><!--nav end-->
 					<div class="menu-btn">

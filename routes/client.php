@@ -4,6 +4,12 @@ Route::group(['namespace' => 'Client'], function() {
     // Dashboard
     Route::get('/', 'HomeController@index')->name('client.home');
     Route::get('/profile', 'HomeController@profile')->name('client.profile');
+    Route::get('/profile/account-setting', 'HomeController@profileAccountSetting')->name('client.profile.account_setting');
+    Route::get('/jobeur/profile/{id}', 'HomeController@jobeur_profile')->name('client.jobeur_profile');
+    Route::get('/jobs', 'HomeController@jobs')->name('client.jobs');
+
+    Route::post('/profile/deactivate-account-setting', 'HomeController@deactivateAccountSetting')->name('client.deactivate.account_setting');
+    Route::post('/profile/edit-profile', 'HomeController@editProfile')->name('client.edit.profile');
 
     Route::get('/notif/markAsRead', function(){
         \Auth::guard('client')->user()->unreadNotifications->markAsRead();

@@ -148,7 +148,7 @@
 							</div>--><!--search_form end-->
 							<h3>Setting</h3>
 							<ul class="us-links">
-								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="{{ route('jobeur.profile.account_setting') }}" title="">Account Setting</a></li>
 								<!--<li><a href="#" title="">Privacy</a></li>
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>-->

@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html>
 
-<!-- Mirrored from gambolthemes.net/workwise_demo/HTML/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2019 16:49:52 GMT -->
+<!-- Mirrored from gambolthemes.net/workwise_demo/HTML/profile-account-setting.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2019 16:51:58 GMT -->
 <head>
 <meta charset="UTF-8">
-<title>client profile</title>
+<title>Client Account Setting</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="" />
 <meta name="keywords" content="" />
@@ -20,11 +21,11 @@
 <link rel="stylesheet" type="text/css" href="/frontend/css/responsive.css">
 </head>
 
+
 <body>
 
 
 	<div class="wrapper">
-
 
 		<header>
 			<div class="container">
@@ -41,6 +42,7 @@
 					<nav>
 						<ul>
 							<li>
+
                                 @if (Auth::guard('client')->check())
                                     <a href="{{ route('client.home') }}" title="">
                                         <span><img src="/frontend/images/icon1.png" alt=""></span>
@@ -72,12 +74,12 @@
 									Profiles
 								</a>
 								<ul>
-									<li><a href="{{ route('jobeurs.profiles') }}" title="">jobeurs Profiles</a></li>
+									<li><a href="{{ route('jobeurs.profiles') }}" title="">Jobeurs Profiles</a></li>
 									<li><a href="{{ route('client.profile') }}" title="">my-profile-feed</a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="jobs.html" title="">
+								<a href="{{ route('client.jobs') }}" title="">
 									<span><img src="/frontend/images/icon5.png" alt=""></span>
 									Jobs
 								</a>
@@ -92,20 +94,20 @@
 									<div class="nt-title">
 										<h4>Notification</h4>
 
-									</div>
+                                    </div>
 
                                     @foreach (Auth::guard('client')->user()->unreadNotifications as $notification)
                                         <div class="nott-list">
                                             <div class="notfication-details">
                                                 <div class="notification-info">
-                                                    <h3><a href="#" >{!! $notification->data['msg'] !!}</a> <br> {!! $notification->data['proposition'] .'/ PRICE: '. $notification->data['price'] !!}</h3>
+                                                    <h3><a href="#" >Proposition de : {!! $notification->data['jobeur'] !!}</a> <br> {!! $notification->data['proposition'] .'/ PRICE: '. $notification->data['price'] !!}</h3>
                                                     <span>{{ $notification->created_at->diffForHumans() }}</span>
                                                 </div><!--notification-info -->
                                             </div>
                                         </div><!--nott-list end-->
                                     @endforeach
                                     <div class="view-all-nots">
-                                        <a href="{{ route('jobuerNotifMarkAsRead') }}">Mark as read All Notification </a>
+                                        <a href="{{ route('clientNotifMarkAsRead') }}">Mark as read All Notification </a>
                                     </div>
 								</div><!--notification-box end-->
 							</li>
@@ -175,112 +177,103 @@
 				</div><!--header-data end-->
 			</div>
 		</header><!--header end-->
+		<section class="profile-account-setting">
+			<div class="container">
+				<div class="account-tabs-setting">
+					<div class="row">
+						<div class="col-lg-3">
+							<div class="acc-leftbar">
+								<div class="nav nav-tabs" id="nav-tab" role="tablist">
 
 
+								    <a class="nav-item nav-link active" id="nav-edit-tab" data-toggle="tab" href="#nav-edit" role="tab" aria-controls="nav-edit" aria-selected="false"><i class="fa fa-random"></i>Edit Profil</a>
+								    <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab" href="#nav-deactivate" role="tab" aria-controls="nav-deactivate" aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>
+								  </div>
+							</div><!--acc-leftbar end-->
+						</div>
+						<div class="col-lg-9">
+							<div class="tab-content" id="nav-tabContent">
 
-		<section class="cover-sec">
-			<img src="/frontend/images/resources/cover-img.jpg" alt="">
+							  	<div class="tab-pane fade show active" id="nav-edit" role="tabpanel" aria-labelledby="nav-edit-tab">
+									<div class="acc-setting">
+										<h3>Account Setting</h3>
+                                        <form action="{{ route('client.edit.profile') }}" method="post" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="cp-field">
+												<h5>Name</h5>
+												<div class="cpp-fiel">
+                                                    <input type="text" name="name" placeholder="Name" value="{{ Auth::guard('client')->user()->name }}">
+													<i class="fa fa-lock"></i>
+												</div>
+											</div>
+											<div class="cp-field">
+												<h5>Email</h5>
+												<div class="cpp-fiel">
+                                                    <input type="text" name="email" placeholder="Email" value="{{ Auth::guard('client')->user()->email }}">
+													<i class="fa fa-lock"></i>
+												</div>
+                                            </div>
 
+											<div class="cp-field">
+												<h5>Phone</h5>
+												<div class="cpp-fiel">
+                                                    <input type="text" name="tel" placeholder="Phone" value="{{ Auth::guard('client')->user()->tel }}">
+													<i class="fa fa-lock"></i>
+												</div>
+                                            </div>
+
+											<div class="cp-field">
+												<h5>Profil img</h5>
+                                                <input type="file" name="profil_img" class="form-control">
+											</div>
+
+											<div class="save-stngs pd2">
+												<ul>
+													<li><button type="submit">Save</button></li>
+												</ul>
+											</div><!--save-stngs end-->
+										</form>
+									</div><!--acc-setting end-->
+                                </div>
+
+							  	<div class="tab-pane fade" id="nav-deactivate" role="tabpanel" aria-labelledby="nav-deactivate-tab">
+							  		<div class="acc-setting">
+										<h3>Deactivate Account</h3>
+                                        <form action="{{ route('client.deactivate.account_setting') }}"method="post">
+											<div class="save-stngs pd3">
+                                                @csrf
+
+                                                <input type="hidden" name="active" value="0">
+												<ul>
+													<li><button type="submit">Confirmer</button></li>
+												</ul>
+											</div><!--save-stngs end-->
+										</form>
+									</div><!--acc-setting end-->
+							  	</div>
+							</div>
+						</div>
+					</div>
+				</div><!--account-tabs-setting end-->
+			</div>
 		</section>
 
 
-		<main>
-			<div class="main-section">
-				<div class="container">
-					<div class="main-section-data">
-						<div class="row">
-							<div class="col-lg-3">
-								<div class="main-left-sidebar">
-									<div class="user_profile">
-										<div class="user-pro-img">
-                                            <img src="{{ url('images/profil', Auth::guard('client')->user()->profil_img ) }}" width="170" height="170">
-										</div><!--user-pro-img end-->
-										<div class="user_pro_status">
-
-											<ul class="flw-status">
-												<li>
-													<span>Evaluation</span>
-													<b>34</b>
-												</li>
-
-											</ul>
-										</div><!--user_pro_status end-->
 
 
-									</div><!--user_profile end-->
-									<div class="suggestions full-width">
-
-
-									</div><!--suggestions end-->
-								</div><!--main-left-sidebar end-->
-							</div>
-							<div class="col-lg-6">
-								<div class="main-ws-sec">
-									<div class="user-tab-sec">
-										<h3>{{ Auth::guard('client')->user()->name }}</h3>
-										<div class="star-descp">
-											<span>note</span>
-											<ul>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star-half-o"></i></li>
-											</ul>
-
-										</div><!--star-descp end-->
-										<div class="tab-feed st2">
-											<ul >
-
-												<li data-tab="info-dd" class="active">
-													<a href="#" title="">
-														<img src="/frontend/images/ic2.png" alt="">
-														<span>Info</span>
-													</a>
-												</li>
-
-												</ul>
-
-
-										</div><!-- tab-feed end-->
-									</div><!--user-tab-sec end-->
-									<div class="product-feed-tab current" id="feed-dd">
-										<div></div>
-									</div><!--product-feed-tab end-->
-									<div class="product-feed-tab" id="info-dd">
-
-										<div class="user-profile-ov st2">
-											<h3><a href="#" title="" class="exp-bx-open">Personal Information </a></h3></br></br></br>
-											<h4>E-mail </h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam lectus commodo viverra. </p>
-											<h4>Phone Number</h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum commodo id.</p>
-
-										</div><!--user-profile-ov end-->
-										<div class="user-profile-ov">
-											<h3><a href="#" title="" class="ed-box-open">Evaluation</a></h3> </br></br></br>
-											<h4>Evaluation</h4>
-											<span>2015 - 2017</span>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam lectus commodo viverra. </p>
-										</div><!--user-profile-ov end-->
-
-									</div><!--product-feed-tab end-->
-
-				</div>
-			</div>
-		</main>
+	</div><!--theme-layout end-->
 
 
 
+    <script type="text/javascript" src="/frontend/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/frontend/js/popper.js"></script>
+    <script type="text/javascript" src="/frontend/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/frontend/js/flatpickr.min.js"></script>
+    <script type="text/javascript" src="/frontend/lib/slick/slick.min.js"></script>
+    <script type="text/javascript" src="/frontend/js/script.js"></script>
 
 
-<script type="text/javascript" src="/frontend/js/jquery.min.js"></script>
-<script type="text/javascript" src="/frontend/js/popper.js"></script>
-<script type="text/javascript" src="/frontend/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/frontend/js/flatpickr.min.js"></script>
-<script type="text/javascript" src="/frontend/lib/slick/slick.min.js"></script>
-<script type="text/javascript" src="/frontend/js/script.js"></script>
 </body>
 
-<!-- Mirrored from gambolthemes.net/workwise_demo/HTML/my-profile-feed.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2019 16:51:52 GMT -->
+<!-- Mirrored from gambolthemes.net/workwise_demo/HTML/profile-account-setting.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2019 16:52:01 GMT -->
 </html>

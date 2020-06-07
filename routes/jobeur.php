@@ -5,6 +5,10 @@ Route::group(['namespace' => 'Jobeur'], function() {
     Route::get('/', 'HomeController@index')->name('jobeur.home');
     Route::get('/profile', 'HomeController@profile')->name('jobeur.profile');
 
+    Route::get('/profile/account-setting', 'HomeController@profileAccountSetting')->name('jobeur.profile.account_setting');
+    Route::post('/profile/deactivate-account-setting', 'HomeController@deactivateAccountSetting')->name('jobeur.deactivate.account_setting');
+    Route::post('/profile/edit-profile', 'HomeController@editProfile')->name('jobeur.edit.profile');
+
     Route::get('/notif/markAsRead', function(){
         \Auth::guard('jobeur')->user()->unreadNotifications->markAsRead();
         return back();

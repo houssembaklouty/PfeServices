@@ -27,8 +27,6 @@
 
 	<div class="wrapper">
 
-
-
 		<header>
 			<div class="container">
 				<div class="header-data">
@@ -44,10 +42,18 @@
 					<nav>
 						<ul>
 							<li>
-								<a href="{{ route('home') }}" title="">
-									<span><img src="/frontend/images/icon1.png" alt=""></span>
-									Home
-								</a>
+
+                                @if (Auth::guard('client')->check())
+                                    <a href="{{ route('client.home') }}" title="">
+                                        <span><img src="/frontend/images/icon1.png" alt=""></span>
+                                        Home
+                                    </a>
+                                @else
+                                    <a href="{{ route('home') }}" title="">
+                                        <span><img src="/frontend/images/icon1.png" alt=""></span>
+                                        Home
+                                    </a>
+                                @endif
 							</li>
 							<li>
 								<a href="{{ route('categories') }}" title="">
@@ -73,7 +79,7 @@
 								</ul>
 							</li>
 							<li>
-								<a href="jobs.html" title="">
+								<a href="{{ route('client.jobs') }}" title="">
 									<span><img src="/frontend/images/icon5.png" alt=""></span>
 									Jobs
 								</a>
@@ -148,7 +154,7 @@
 							</div>--><!--search_form end-->
 							<h3>Setting</h3>
 							<ul class="us-links">
-								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="{{ route('client.profile.account_setting') }}" title="">Account Setting</a></li>
 								<!--<li><a href="#" title="">Privacy</a></li>
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>-->
@@ -275,8 +281,10 @@
 														<li>
 															<div class="comment-list">
 																<div class="bg-img">
-                                                                    <img src="{{ url('images/profil', $propositions->jobeur->profil_img ) }}" alt="jobeur avatar" width="50" height="50">
-																</div>
+                                                                    <a href="{{ route('client.jobeur_profile', $propositions->jobeur->id) }}">
+
+                                                                        <img src="{{ url('images/profil', $propositions->jobeur->profil_img ) }}" alt="jobeur avatar" width="50" height="50">
+                                                                    </a>																</div>
 																<div class="comment">
 																	<h3>{{ $propositions->jobeur->name }}</h3>
                                                                 <span>

@@ -116,9 +116,9 @@
 					</div><!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
-                            <img src="{{ url('images/profil', Auth::guard('client')->user()->profil_img ) }}" width="30" height="30">
+                            <img src="{{ url('images/profil', $jobeur->profil_img ) }}" width="30" height="30">
 
-							<a href="#" title="">{{ Auth::guard('client')->user()->name }}</a>
+							<a href="#" title="">{{ $jobeur->name }}</a>
 							<i class="la la-sort-down"></i>
 						</div>
 						<div class="user-account-settingss">
@@ -152,7 +152,7 @@
 							</div>--><!--search_form end-->
 							<h3>Setting</h3>
 							<ul class="us-links">
-								<li><a href="{{ route('client.profile.account_setting') }}" title="">Account Setting</a></li>
+								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
 								<!--<li><a href="#" title="">Privacy</a></li>
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>-->
@@ -193,7 +193,7 @@
 								<div class="main-left-sidebar">
 									<div class="user_profile">
 										<div class="user-pro-img">
-                                            <img src="{{ url('images/profil', Auth::guard('client')->user()->profil_img ) }}" width="170" height="170">
+                                            <img src="{{ url('images/profil', $jobeur->profil_img ) }}" width="170" height="170">
 										</div><!--user-pro-img end-->
 										<div class="user_pro_status">
 
@@ -217,7 +217,7 @@
 							<div class="col-lg-6">
 								<div class="main-ws-sec">
 									<div class="user-tab-sec">
-										<h3>{{ Auth::guard('client')->user()->name }}</h3>
+										<h3>{{ $jobeur->name }}</h3>
 										<div class="star-descp">
 											<span>note</span>
 											<ul>

@@ -46,6 +46,11 @@ class HomeController extends Controller
         return view('jobeur.profile');
     }
 
+    public function profileAccountSetting() {
+
+        return view('jobeur.profile-account-settings');
+    }
+
     public function propositionDestroy (Request $request) {
 
         $demende = Demende::where('id', $request->id)->delete();
@@ -72,6 +77,48 @@ class HomeController extends Controller
         ];
 
         $user->notify(new NotifUserProposition($notifData));
+
+        return back();
+    }
+
+
+    public function deactivateAccountSetting(Request $request) {
+
+        $thisJobeur = Auth::guard('jobeur')->user();
+
+        $updateThisJobeur = Jobeur::where('id', $thisJobeur->id)->update(['active' => $request->active]);
+
+        return back();
+    }
+
+    public function editProfile(Request $request) {
+
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
+
+        $thisJobeur = Auth::guard('jobeur')->user();
+
+        if(!is_null($request->profil_img)) {
+
+            $extension = $request->profil_img->getClientOriginalExtension();
+            $filename = time().rand(10, 1000).'.'.$extension;
+            $request->profil_img->move(public_path('images/profil'), $filename);
+
+            $request->profil_img = $filename;
+        }
+        else {
+            $request->profil_img = $thisJobeur->profil_img;
+        }
+
+        $updateThisJobeur = Jobeur::where('id', $thisJobeur->id)
+                            ->update([
+                                'name' => $request->name,
+                                'email' => $request->email,
+                                'tel' => $request->tel,
+                                'profil_img' => $request->profil_img,
+                            ]);
 
         return back();
     }
