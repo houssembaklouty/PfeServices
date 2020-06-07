@@ -293,7 +293,7 @@
                                                                 </span>
                                                                     <p>{{ $propositions->proposition }} </p>
 
-                                                                    @if($propositions->etat == false)
+                                                                    {{-- @if($propositions->etat == false) --}}
                                                                         <form method="post" action="{{ route('client.proposition.change_state') }}">
                                                                             @csrf
 
@@ -302,7 +302,7 @@
 
                                                                             <button class="btn btn-sm btn-success pull-right" type="submit" value="post">Accepter</button>
                                                                         </form>
-                                                                        @else
+                                                                        {{-- @else --}}
                                                                         <form method="post" action="{{ route('client.proposition.change_state') }}">
                                                                             @csrf
 
@@ -311,7 +311,7 @@
 
                                                                             <button class="btn btn-sm btn-danger pull-right" type="submit" value="post">Refusé</button>
                                                                         </form>
-                                                                    @endif
+                                                                    {{-- @endif --}}
 																</div>
 															</div><!--comment-list end-->
 														</li>
