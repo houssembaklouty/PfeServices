@@ -81,8 +81,8 @@ class HomeController extends Controller
 
         $jobeur = Jobeur::where('id', $demende->id_jobeur)->first();
 
-        if($request->etat == 1) { $msg = "votre demande a été accepté"; }
-        else { $msg = "votre demande a été refusé"; }
+        if($request->etat == 1) { $msg = "votre demande a été accepté"; $msg_front = 'Proposition accepted'; }
+        else { $msg = "votre demande a été refusé"; $msg_front = 'Proposition refused'; }
 
         $notifData = [
             'proposition' => $demende['proposition'],
@@ -93,7 +93,7 @@ class HomeController extends Controller
 
         $jobeur->notify(new NotifUserProposition($notifData));
 
-        return back();
+        return back()->with('info', $msg_front);
     }
 
     public function deactivateAccountSetting(Request $request) {

@@ -224,7 +224,15 @@
 												<li><a class="post-jb active" href="#" title="">Post a Job</a></li>
 											</ul>
 										</div><!--post-st end-->
-									</div><!--post-topbar end-->
+                                    </div><!--post-topbar end-->
+
+                                    @if ($message = Session::get('info'))
+                                    <div class="alert alert-info alert-block">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @endif
+
 									<div class="posts-section">
 
                                         @foreach($posts as $post)
@@ -294,6 +302,7 @@
                                                                     <p>{{ $propositions->proposition }} </p>
 
                                                                     {{-- @if($propositions->etat == false) --}}
+                                                                    @if($post->client == Auth::guard('client')->user()->id)
                                                                         <form method="post" action="{{ route('client.proposition.change_state') }}">
                                                                             @csrf
 
@@ -311,6 +320,7 @@
 
                                                                             <button class="btn btn-sm btn-danger pull-right" type="submit" value="post">Refusé</button>
                                                                         </form>
+                                                                    @endif
                                                                     {{-- @endif --}}
 																</div>
 															</div><!--comment-list end-->

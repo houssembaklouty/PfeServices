@@ -98,7 +98,7 @@
                                         <div class="nott-list">
                                             <div class="notfication-details">
                                                 <div class="notification-info">
-                                                    <h3><a href="#" >{!! $notification->data['msg'] !!}</a> <br> {!! $notification->data['proposition'] .'/ PRICE: '. $notification->data['price'] !!}</h3>
+                                                    <h3><a href="#" >Proposition de : {!! $notification->data['jobeur'] !!}</a> <br> {!! $notification->data['proposition'] .'/ PRICE: '. $notification->data['price'] !!}</h3>
                                                     <span>{{ $notification->created_at->diffForHumans() }}</span>
                                                 </div><!--notification-info -->
                                             </div>
