@@ -5,7 +5,7 @@
 <!-- Mirrored from gambolthemes.net/workwise_demo/HTML/jobs.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2019 16:51:52 GMT -->
 <head>
 <meta charset="UTF-8">
-<title>client jobs</title>
+<title>edit client jobs</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="" />
 <meta name="keywords" content="" />
@@ -199,138 +199,98 @@
 							</div>
 							<div class="col-lg-6">
 								<div class="main-ws-sec">
-
-                                    @if ($message = Session::get('success'))
-                                    <div class="alert alert-success alert-block">
-                                        <button type="button" class="close" data-dismiss="alert">×</button>
-                                        <strong>{{ $message }}</strong>
-                                    </div>
-                                    @endif
-
 									<div class="posts-section">
 
+                                        <div class="post-project">
+                                            <h3>Edit a job</h3>
+                                            <div class="post-project-fields">
+                                                <div>
 
-                                        @foreach($posts as $post)
-
-										<div class="posty" style="margin-bottom: 1em;">
-											<div class="post-bar no-margin">
-												<div class="post_topbar">
-													<div class="usy-dt">
-                                                        {{-- <img src="/frontend/images/resources/us-pc2.png" alt=""> --}}
-                                                        <img src="{{ url('images/profil', $post->client_relation->profil_img ) }}" alt="user" width="50" height="50">
-														<div class="usy-name">
-															<h3>{{ $post->client_relation->name }}</h3>
-															<span><img src="/frontend/images/clock.png" alt="">{{ $post->created_at->diffForHumans() }}</span>
-														</div>
+                                                    @if ($message = Session::get('success'))
+                                                    <div class="alert alert-success alert-block">
+                                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                                        <strong>{{ $message }}</strong>
                                                     </div>
+                                                    @endif
 
-                                                    <div class="ed-opts">
-                                                        <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                                                        <ul class="ed-options">
-                                                            <li><a href="{{ route('client.jobs.edit', $post->id) }}" title="">Edit Post</a></li>
-                                                            <li>
-                                                                <form method="post" action="{{ route('client.jobs.destroy', $post->id) }}">
-                                                                    @csrf
-
-                                                                    <button class="btn btn-sm btn-danger"onclick= "return confirm('Are You Sure Want to Delete?')" type="submit">
-                                                                        <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
-                                                                    </button>
-                                                                </form>
-                                                            </li>
-
-                                                        </ul>
-                                                    </div>
-
-												</div>
-												<div class="epi-sec">
-													<ul class="descp">
-														<li><img src="/frontend/images/icon8.png" alt=""><span>{{ $post->catgeory->nom }}</span></li>
-														<li><img src="/frontend/images/icon9.png" alt=""><span>{{ $post->service_relation->nom }}</span></li>
-													</ul>
-
-                                                    <ul class="bk-links">
-                                                        <li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-                                                        <li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-                                                    </ul>
+                                                    @if ($errors->any())
+                                                        @foreach ($errors->all() as $error)
+                                                            <div>{{$error}}</div>
+                                                        @endforeach
+                                                    <br>
+                                                    @endif
                                                 </div>
+                                                <form method="post" action="{{ route('client.jobs.update', $post->id) }}">
+                                                    @csrf
 
-												<div class="job_descp">
-													<h3>{{ $post->title }}</h3>
-													<ul class="job-dt">
-														<li><a>{{ $post->date->format('d/m/Y') }}</a></li>
-														Price: <li><span>{{ $post->price }}</span></li>
-													</ul>
-                                                    <p>{{ $post->description }}</p>
-                                                    Skills:
-													<ul class="skill-tags">
-														<li><a href="#" title="">{{ $post->skills }}</a></li>
-													</ul>
-												</div>
-												<div class="job-status-bar">
-													<ul style="justify-content:space-around!important;" class="like-com">
-
-                                                    <li  ><a href="#" style="margin-top: 20px;" title="" class="com"><img src="/frontend/images/com.png" alt=""> Proposition(s) {{$post->propositions->count() }}</a></li>
-													</ul>
-
-												</div>
-											</div><!--post-bar end-->
-
-
-
-											<div class="comment-section">
-												<div class="plus-ic">
-													<i class="la la-plus"></i>
-												</div>
-												<div class="comment-sec">
-                                                    @foreach($post->propositions as $propositions)
-													<ul>
-														<li>
-															<div class="comment-list">
-																<div class="bg-img">
-                                                                    <a href="{{ route('client.jobeur_profile', $propositions->jobeur->id) }}">
-
-                                                                        <img src="{{ url('images/profil', $propositions->jobeur->profil_img ) }}" alt="jobeur avatar" width="50" height="50">
-                                                                    </a>
-																</div>
-																<div class="comment">
-																	<h3>{{ $propositions->jobeur->name }}</h3>
-                                                                <span>
-                                                                    <img src="/frontend/images/clock.png" alt="">
-                                                                    {{ $propositions->created_at->diffForHumans() }}
-                                                                </span>
-                                                                    <p>{{ $propositions->proposition }} </p>
-
-                                                                    @if($propositions->etat == false)
-                                                                        <form method="post" action="{{ route('client.proposition.change_state') }}">
-                                                                            @csrf
-
-                                                                            <input type="hidden" name="id" value="{{ $propositions->id }}">
-                                                                            <input type="hidden" name="etat" value="1">
-
-                                                                            <button class="btn btn-sm btn-success pull-right" type="submit" value="post">Accepter</button>
-                                                                        </form>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <input type="text" name="title" placeholder="Title" value="{{ $post->title }}" required>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="inp-field">
+                                                                <select class="categories" name="categorie" required>
+                                                                    <option disabled selected>Category</option>
+                                                                    @foreach ($categories as $categorie)
+                                                                        @if($categorie->id == $post->categorie)
+                                                                            <option selected value="{{ $categorie->id }}">{{ $categorie->nom }}</option>
                                                                         @else
-                                                                        <form method="post" action="{{ route('client.proposition.change_state') }}">
-                                                                            @csrf
+                                                                            <option value="{{ $categorie->id }}">{{ $categorie->nom }}</option>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                        </div>
 
-                                                                            <input type="hidden" name="id" value="{{ $propositions->id }}">
-                                                                            <input type="hidden" name="etat" value="0">
 
-                                                                            <button class="btn btn-sm btn-danger pull-right" type="submit" value="post">Refusé</button>
-                                                                        </form>
-                                                                    @endif
-																</div>
-															</div><!--comment-list end-->
-														</li>
-                                                    </ul>
-                                                    @endforeach
-												</div><!--comment-sec end-->
 
-											</div><!--comment-section end-->
-                                        </div><!--posty end-->
+                                                        <div class="col-lg-12">
+                                                            <div class="inp-field">
+                                                                <select class="services" name="service" required>
+                                                                    @foreach ($services as $service)
+                                                                        @if($service->id == $post->service)
+                                                                            <option selected value="{{ $service->id }}">{{ $service->nom }}</option>
+                                                                        @else
+                                                                            <option value="{{ $service->id }}">{{ $service->nom }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
 
-                                        @endforeach
-
+                                                        <div class="col-lg-12">
+                                                            <input type="text" name="skills" placeholder="Skills" value="{{ $post->skills }}" required>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="price-br">
+                                                                <input type="text" name="price" placeholder="Price" value="{{ $post->price }}" required>
+                                                                <i class="la la-dollar"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="text" name="date" placeholder="Date" value="{{ $post->date->format('d/m/Y') }}" required>
+                                                        {{--
+                                                            <div class="inp-field">
+                                                                <select>
+                                                                    <option>Full Time</option>
+                                                                    <option>Half time</option>
+                                                                </select>
+                                                            </div> --}}
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <textarea name="description" placeholder="Description" required>{{ $post->description }}</textarea>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <ul>
+                                                                <li><button class="active" type="submit" value="post">Update</button></li>
+                                                                <li><a href="#" title="">Cancel</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div><!--post-project-fields end-->
+                                            <a href="#" title=""><i class="la la-times-circle-o"></i></a>
+                                        </div><!--post-project end-->
 
 									</div><!--posts-section end-->
 								</div><!--main-ws-sec end-->
@@ -458,6 +418,45 @@
     <script type="text/javascript" src="/frontend/js/flatpickr.min.js"></script>
     <script type="text/javascript" src="/frontend/lib/slick/slick.min.js"></script>
     <script type="text/javascript" src="/frontend/js/script.js"></script>
+
+
+
+<script>
+    $(document).on('change','.categories',function(){
+        console.log("yeees ! , its change");
+
+        var categorie_id=$(this).val();
+        console.log('categorie_id', categorie_id);
+
+        var op=" ";
+
+        $.ajax({
+            type:'get',
+            url:'{!! URL::to('getServices') !!}',
+            data:{'id':categorie_id},
+            success: handelResponse,
+            error: handelError
+        });
+
+
+        function handelResponse(data){
+            console.log(data);
+            //console.log(data.length);
+            op+='<option value="0" selected disabled>Services ..</option>';
+            for(var i=0;i<data.length;i++){
+                op+='<option value="'+data[i].id+'">'+data[i].nom+'</option>';
+            }
+
+            $(".services").html(" ");
+            $(".services").append(op);
+        }
+
+        function handelError(){
+
+        }
+    });
+
+</script>
 </body>
 
 <!-- Mirrored from gambolthemes.net/workwise_demo/HTML/jobs.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2019 16:51:52 GMT -->

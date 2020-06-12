@@ -56,6 +56,35 @@ class HomeController extends Controller
         return view('client.jobs', compact('posts'));
     }
 
+    public function jobs_edit($id) {
+
+        $post = Post::where('id', $id)->with('service_relation')->firstOrFail();
+
+        if($post->client != Auth::guard('client')->user()->id) {
+
+            return redirect('client');
+        }
+
+        $categories = Categorie::orderBy('nom', 'asc')->get();
+        $services = Service::where('categorie_id', $post->categorie)->orderBy('nom', 'asc')->get();
+
+        return view('client.jobs_edit', compact('post' ,'categories','services'));
+    }
+
+    public function jobs_update(Request $request, $id) {
+
+        $post = Post::where('id', $id)->with('service_relation')->firstOrFail();
+
+        if($post->client != Auth::guard('client')->user()->id) {
+
+            return redirect('client');
+        }
+
+        $post->update($request->all());
+
+        return back()->with('success', 'Done!');
+    }
+
     public function profile() {
 
         return view('client.profile');
@@ -94,6 +123,20 @@ class HomeController extends Controller
         $jobeur->notify(new NotifUserProposition($notifData));
 
         return back()->with('info', $msg_front);
+    }
+
+    public function jobs_destroy($id) {
+
+        $post = Post::where('id', $id)->firstOrFail();
+
+        if($post->client != Auth::guard('client')->user()->id) {
+
+            return redirect('client');
+        }
+
+        Post::destroy($id);
+
+        return back()->with('success', 'Done!');
     }
 
     public function deactivateAccountSetting(Request $request) {

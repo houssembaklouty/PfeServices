@@ -7,6 +7,9 @@ Route::group(['namespace' => 'Client'], function() {
     Route::get('/profile/account-setting', 'HomeController@profileAccountSetting')->name('client.profile.account_setting');
     Route::get('/jobeur/profile/{id}', 'HomeController@jobeur_profile')->name('client.jobeur_profile');
     Route::get('/jobs', 'HomeController@jobs')->name('client.jobs');
+    Route::get('/jobs/edit/{id}', 'HomeController@jobs_edit')->name('client.jobs.edit');
+    Route::post('/jobs/update/{id}', 'HomeController@jobs_update')->name('client.jobs.update');
+    Route::post('/jobs/destroy/{id}', 'HomeController@jobs_destroy')->name('client.jobs.destroy');
 
     Route::post('/profile/deactivate-account-setting', 'HomeController@deactivateAccountSetting')->name('client.deactivate.account_setting');
     Route::post('/profile/edit-profile', 'HomeController@editProfile')->name('client.edit.profile');

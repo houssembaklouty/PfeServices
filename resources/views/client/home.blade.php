@@ -506,10 +506,6 @@
 			</div>
 		</main>
 
-
-
-
-
 		<div class="post-popup job_post">
 			<div class="post-project">
                 <h3>Post a job</h3>
